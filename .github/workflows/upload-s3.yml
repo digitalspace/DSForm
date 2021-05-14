@@ -39,7 +39,7 @@ jobs:
       - name: "SAM setup"
         uses: r0zar/sam-deploy-action@v1.4
         env:
-          TEMPLATE: 'template.yaml'
+          TEMPLATE: 'template.yml'
           AWS_STACK_NAME: 'dsFormApp'
           AWS_REGION: us-east-1
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
