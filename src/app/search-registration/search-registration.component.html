@@ -7,7 +7,7 @@
 
         <div class="form-group row p-6">
             <div class="p-6">
-                <label>Look up registration:
+                <label class="w-100">Look up registration:
                     <div class="input-group">
                         <input class="form-control" placeholder="Enter your email" type="email"
                             formControlName="searchEmail" required>
@@ -34,7 +34,7 @@
         <div class="py-3">
             <p><strong>Full Name:</strong> {{firstName}} {{lastName}}</p>
             <p><strong>Email:</strong> {{userEmail}}</p>
-            <p><strong>Registration Date:</strong> {{registrationDate}}</p>
+            <p><strong>Registration Date:</strong> {{registrationDate | date:'mediumDate'}}</p>
             <p><strong>Province:</strong> {{province}} </p>
         </div>
         <button class="btn btn-danger" (click)="checkUnregister()">Unregister</button>
