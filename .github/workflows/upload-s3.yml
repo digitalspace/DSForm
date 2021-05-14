@@ -40,7 +40,7 @@ jobs:
           AWS_REGION: us-east-1
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_DEPLOY_BUCKET: ds-form
+          AWS_DEPLOY_BUCKET: ds-form-digitalspace
       # - name: Build lambda environment
       #   run: cd lambda && npm install && zip -qq -r -j ../bundle.zip .
       # - name: Deploy zip to aws lambda
