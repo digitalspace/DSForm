@@ -35,23 +35,23 @@ export class SearchRegistrationComponent implements OnInit {
 
   onSubmit(){
     this.successfulUnregister = false;
+    this.submitted = true;
     this.dsformService.findbyEmail(this.lookupForm.value.searchEmail)
     .subscribe(data =>{
-      this.submitted = true;
-      if (!data || !data[0]){
+      if (!data){
         this.isRegistrationFound = false;
       } else {
         this.isRegistrationFound = true;
 
-        this.firstName = data[0].firstName;
-        this.lastName = data[0].lastName;
-        this.registrationDate = data[0].date;
-        this.userEmail = data[0].email;
-        this.province = data[0].location;
+        this.firstName = Object(data).firstName;
+        this.lastName = Object(data).lastName;
+        this.registrationDate = Object(data).date;
+        this.userEmail = Object(data).email;
+        this.province = Object(data).location;
       }
-      console.log(data);
     },
     error => {
+      this.isRegistrationFound = false;
       console.log(error);
     }
     );
@@ -80,15 +80,17 @@ export class SearchRegistrationComponent implements OnInit {
     // implement
     this.dsformService.findbyEmail(this.lookupForm.value.searchEmail)
     .subscribe(data => {
-      if(!data || !data[0]){
-        console.log("unsuccessful delete")
+      if(!data){
+        console.log("unsuccessful unregister")
       } else {
-        console.log(`record id : ${data[0]._id}`)
-        this.dsformService.delete(data[0]._id)
+        console.log(`record id : ${Object(data)._id}`)
+        this.dsformService.delete(Object(data)._id)
         .subscribe(data =>{
           this.successfulUnregister = true;
+          console.log('successfully unregistered')
         },
         error => {
+          console.log('unsuccessful unregister');
           console.log(error);
         })
       }

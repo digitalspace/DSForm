@@ -37,27 +37,26 @@ export class RegistrationFormComponent implements OnInit {
   }
 
   onSubmit() {
+    this.ifRegisterSuccessful = false;
     console.log('newSubmit');
     let p = new Promise((resolve, reject) => {
       this.dsformService.findbyEmail(this.registrationForm.value.userEmail)
       .subscribe(data =>{
-        if(!data || !data[0]){
-          this.ifEmailExists = false;
-          console.log('false');
-        } else {
-          this.ifEmailExists = true;
-          console.log('true');
-        }
-        resolve(this.ifEmailExists);
+        this.submitted = true;
+        this.ifEmailExists = true
+        resolve(this.ifEmailExists)
       },
       error => {
+        this.ifEmailExists = false;
         reject(error);
       });
     });
 
     p.then(exists => {
-      if(!exists){
-        console.log("new record");
+       console.log("record already exists.");
+    })
+    .catch(msg => {
+      console.log("new record");
         const dataset = {
           firstName: this.registrationForm.value.firstName,
           lastName: this.registrationForm.value.lastName,
@@ -77,14 +76,6 @@ export class RegistrationFormComponent implements OnInit {
             console.log(error);
           }
         );
-      } else {
-        console.log('record exists');
-        this.submitted = true;
-        this.ifRegisterSuccessful = false;
-      }
-    })
-    .catch(msg => {
-      console.log("error " + msg);
     })
   }
 

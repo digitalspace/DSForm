@@ -37,7 +37,7 @@ export class DSFormService {
     }
 
     findbyEmail(email) {
-        return this.http.get(`${mainUrl}?email=${email}`);
+        return this.http.get(`${mainUrl}/${email}`);
     }
 
 }

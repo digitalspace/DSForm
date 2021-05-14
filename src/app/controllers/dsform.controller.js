@@ -17,20 +17,19 @@ exports.create = (req, res) => {
         email: req.body.email,
         location: req.body.location
     });
-    console.log(`*** New Entry ***`)
+    console.log(`\n*** New Reservation ***\n`)
     console.log(`First Name: ${req.body.firstName}`)
     console.log(`Last Name: ${req.body.lastName}`)
     console.log(`Date: ${req.body.date}`)
     console.log(`Email: ${req.body.email}`)
     console.log(`Location: ${req.body.location}`)
-    console.log(`*** ------ ***`)
+    console.log(`\n*** ------ ***\n`)
 
     // save form in db
     dsform
         .save(dsform)
         .then(data => {
             res.send(data);
-            console.log(res);
         })
         .catch(err => {
             res.status(500).send({
@@ -61,7 +60,7 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
     const email = req.params.email;
 
-    DSForm.findById(email)
+    DSForm.findOne({email: email})
     .then(data => {
         if (!data)
           res.status(404).send({ message: "Unable to find email " + email });
@@ -82,7 +81,6 @@ exports.update = (req, res) => {
 // Delete a form
 exports.delete = (req, res) => {
     const id = req.params.id;
-    console.log(req);
 
     DSForm.findByIdAndRemove(id)
     .then(data => {
