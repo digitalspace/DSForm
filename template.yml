@@ -9,6 +9,7 @@ Resources:
   AppBucket:
     Type: AWS::S3::Bucket
     Properties:
+      BucketName: "ds-form"
       AccessControl: PublicRead
       WebsiteConfiguration:
         IndexDocument: index.html
