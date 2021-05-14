@@ -1,0 +1,42 @@
+<div class="text-md-left">
+    <h1>Look Up</h1>
+</div>
+
+<div class="justify-content-start">
+    <form [formGroup]="lookupForm" (ngSubmit)="onSubmit()" novalidate>
+
+        <div class="form-group row p-6">
+            <div class="p-6">
+                <label>Look up registration:
+                    <div class="input-group">
+                        <input class="form-control" placeholder="Enter your email" type="email"
+                            formControlName="searchEmail" required>
+                        <div class="input-group-append">
+                            <button [disabled]="!isEmailValid()" type="button" class="btn btn-secondary"
+                                (click)="onSubmit()">Submit</button>
+                        </div>
+                    </div>
+                </label>
+            </div>
+        </div>
+
+    </form>
+
+    <div *ngIf="!isRegistrationFound && submitted && lookupForm.dirty" class='mt-3'>
+        <p class="text-danger">No registration found under that address.</p>
+    </div>
+    <div *ngIf="successfulUnregister && !lookupForm.dirty" class='mt-3'>
+        <p class="text-success">Successfully unregistered.</p>
+    </div>
+
+    <div *ngIf="checkRegistration()" class='mt-3'>
+        <h5>Your registration information:</h5>
+        <div class="py-3">
+            <p><strong>Full Name:</strong> {{firstName}} {{lastName}}</p>
+            <p><strong>Email:</strong> {{userEmail}}</p>
+            <p><strong>Registration Date:</strong> {{registrationDate}}</p>
+            <p><strong>Province:</strong> {{province}} </p>
+        </div>
+        <button class="btn btn-danger" (click)="checkUnregister()">Unregister</button>
+    </div>
+</div>
