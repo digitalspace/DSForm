@@ -9,7 +9,7 @@ Resources:
   AppBucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: "ds-form"
+      BucketName: "ds-form-digitalspace"
       AccessControl: PublicRead
       WebsiteConfiguration:
         IndexDocument: index.html
